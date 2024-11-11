@@ -18,7 +18,7 @@ const Body = () => {
     );
     const json = await data.json();
     const resData =
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     // console.log(resData);
     setResFilter(resData);
     setFilteredRest(resData);
