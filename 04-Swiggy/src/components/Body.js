@@ -2,6 +2,7 @@ import ResCard from "./ResCard";
 import Shimmer from "./shimmer";
 // import ResList from "../utils/mockdata";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [ResList, setResFilter] = useState([]);
@@ -18,7 +19,8 @@ const Body = () => {
     );
     const json = await data.json();
     const resData =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     // console.log(resData);
     setResFilter(resData);
     setFilteredRest(resData);
@@ -38,11 +40,17 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           />
-          <button onClick={()=>{
-            const searchFilteredRes = ResList.filter((i)=>i.info.name.toLowerCase().includes(SearchText.toLowerCase()));
-            console.log(searchFilteredRes);
-            setFilteredRest(searchFilteredRes);
-          }}>Search</button>
+          <button
+            onClick={() => {
+              const searchFilteredRes = ResList.filter((i) =>
+                i.info.name.toLowerCase().includes(SearchText.toLowerCase())
+              );
+              console.log(searchFilteredRes);
+              setFilteredRest(searchFilteredRes);
+            }}
+          >
+            Search
+          </button>
         </div>
         <button
           className="filter-btn"
@@ -57,7 +65,11 @@ const Body = () => {
       </div>
       <div className="res-container">
         {FilteredRest.map((i) => {
-          return <ResCard key={i.info.id} resData={i} />;
+          return (
+            <Link key={i.info.id} to={"/restaurants/" + i.info.id}>
+              <ResCard resData={i} />
+            </Link>
+          );
         })}
       </div>
     </div>
