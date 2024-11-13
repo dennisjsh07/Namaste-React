@@ -3,6 +3,7 @@ import Shimmer from "./shimmer";
 // import ResList from "../utils/mockdata";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [ResList, setResFilter] = useState([]);
@@ -25,6 +26,14 @@ const Body = () => {
     setResFilter(resData);
     setFilteredRest(resData);
   };
+
+  const onlineStatus = useOnlineStatus();
+  // console.log(onlineStatus);
+  if (onlineStatus === false){
+    return (
+      <h1>check your internet connection!!!</h1>
+    )
+  } ;
 
   return ResList.length === 0 ? (
     <Shimmer />
