@@ -29,27 +29,26 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
   // console.log(onlineStatus);
-  if (onlineStatus === false){
-    return (
-      <h1>check your internet connection!!!</h1>
-    )
-  } ;
+  if (onlineStatus === false) {
+    return <h1>check your internet connection!!!</h1>;
+  }
 
   return ResList.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex">
+        <div className="m-4 p-4">
           <input
             type="text"
-            className="searchBox"
+            className="border border-solid border-black"
             value={SearchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
+            className="px-4 py-2 m-4 bg-green-100 rounded-lg"
             onClick={() => {
               const searchFilteredRes = ResList.filter((i) =>
                 i.info.name.toLowerCase().includes(SearchText.toLowerCase())
@@ -61,8 +60,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="m-4 p-4 flex items-center">
         <button
-          className="filter-btn"
+          className="px-4 py-2 m-4 bg-gray-100 rounded-lg"
           onClick={() => {
             const filteredList = ResList.filter((i) => i.info.avgRating > 4.5);
             // console.log('filteredList:',filteredList);
@@ -71,8 +71,9 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {FilteredRest.map((i) => {
           return (
             <Link key={i.info.id} to={"/restaurants/" + i.info.id}>
