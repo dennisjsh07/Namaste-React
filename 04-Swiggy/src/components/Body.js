@@ -1,4 +1,4 @@
-import ResCard from "./ResCard";
+import ResCard, { WithPromotedLabel } from "./ResCard";
 import Shimmer from "./shimmer";
 // import ResList from "../utils/mockdata";
 import { useState, useEffect } from "react";
@@ -9,6 +9,8 @@ const Body = () => {
   const [ResList, setResFilter] = useState([]);
   const [FilteredRest, setFilteredRest] = useState([]);
   const [SearchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = WithPromotedLabel(ResCard);
 
   useEffect(() => {
     fetchData();
@@ -61,23 +63,29 @@ const Body = () => {
           </button>
         </div>
         <div className="m-4 p-4 flex items-center">
-        <button
-          className="px-4 py-2 m-4 bg-gray-100 rounded-lg"
-          onClick={() => {
-            const filteredList = ResList.filter((i) => i.info.avgRating > 4.5);
-            // console.log('filteredList:',filteredList);
-            setFilteredRest(filteredList);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+          <button
+            className="px-4 py-2 m-4 bg-gray-100 rounded-lg"
+            onClick={() => {
+              const filteredList = ResList.filter(
+                (i) => i.info.avgRating > 4.5
+              );
+              // console.log('filteredList:',filteredList);
+              setFilteredRest(filteredList);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
         </div>
       </div>
       <div className="flex flex-wrap">
         {FilteredRest.map((i) => {
           return (
             <Link key={i.info.id} to={"/restaurants/" + i.info.id}>
-              <ResCard resData={i} />
+              {i.info.isOpen === false ? (
+                <ResCard resData={i} />
+              ) : (
+                <RestaurantCardPromoted resData={i} />
+              )}
             </Link>
           );
         })}

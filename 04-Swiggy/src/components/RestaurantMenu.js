@@ -17,6 +17,12 @@ const RestaurantMenu = () => {
   const item =
     ResInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card
       .carousel;
+
+  // console.log(ResInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
+  const categories = ResInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter((i)=>{
+    return i.card.card['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
+  })
+  console.log("categories:", categories);
   return (
     <div className="menu">
       <h1>{name}</h1>
