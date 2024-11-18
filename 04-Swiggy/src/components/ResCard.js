@@ -1,9 +1,9 @@
 import { Card_IMG } from "../utils/constants";
 
 const ResCard = (props) => {
-  console.log("props", props);
+  // console.log("props", props);
   const { resData } = props;
-  console.log("resData ->", resData);
+  // console.log("resData ->", resData);
   const { cloudinaryImageId, name, cuisines, avgRating, sla } = resData.info;
   return (
     <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-300">
@@ -21,7 +21,7 @@ export const WithPromotedLabel = (ResCard) => {
   return (props) => {
     return (
       <div>
-        {console.log("promoted props", props)}
+        {/* {console.log("promoted props", props)} */}
         <label className="absolute bg-black text-white rounded-lg p-2 m-2">Promted</label>
         <ResCard {...props}/>
       </div>

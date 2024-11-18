@@ -55,7 +55,7 @@ const Body = () => {
               const searchFilteredRes = ResList.filter((i) =>
                 i.info.name.toLowerCase().includes(SearchText.toLowerCase())
               );
-              console.log(searchFilteredRes);
+              // console.log(searchFilteredRes);
               setFilteredRest(searchFilteredRes);
             }}
           >
